@@ -2,11 +2,8 @@
 # Road to riches paste system name for Elite Dangerous
 
 import sys
-
-
-def text2clip(text):
-    import subprocess
-    subprocess.run('clip.exe', input=text.strip().encode('utf-16'))
+import pyperclip
+#import pyautogui
 
 
 def process_file(file_name):
@@ -20,7 +17,9 @@ def process_file(file_name):
             system_name = toks[0].strip('"')
             if not system_name.startswith(done_mark) and len(next_system) == 0:
                 next_system = system_name
-                text2clip(system_name)
+                #pyautogui.typewrite(system_name)
+                pyperclip.copy(system_name)
+                pyperclip.paste()
                 system_name = done_mark + system_name
             systems.append(system_name)
     with open(file_name, mode='w') as new_f:
